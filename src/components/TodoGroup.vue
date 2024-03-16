@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { TodoStatus } from '../types';
+import { TodoStatus } from "../types";
 import useTodos from "../store/useTodo";
 import Draggable from "vuedraggable";
+import CreateTodo from "./CreateTodo.vue";
 
 interface Props {
     status: TodoStatus;
@@ -33,6 +34,8 @@ const groupLabel = {
                 </li>
             </template>
         </draggable>
+
+        <CreateTodo :status="props.status"/>
     </div>
 </template>
 
@@ -51,7 +54,10 @@ const groupLabel = {
     padding: 2px 5px;
     cursor: grab;
     margin-bottom: 10px;
+}
 
+.draggable {
+    min-height: 200px;
 }
 
 .todo-description {

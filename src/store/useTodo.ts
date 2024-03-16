@@ -25,6 +25,10 @@ export default () => {
     const getTodosByStatus = (todoStatus: TodoStatus) => {
         return computed(() => todoStore[todoStatus]);
     };
+
+    const addNewTodo = (todo: Todo) => {
+        todoStore[todo.status].push(todo);
+    }
     
-    return { getTodosByStatus };
+    return { getTodosByStatus, addNewTodo };
 };
