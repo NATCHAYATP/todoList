@@ -1,5 +1,7 @@
 import { TodoStatus, type Todo } from "../types";
 import { reactive, computed } from "vue";
+
+const STORAGE_KEY = "todo_store";
 interface TodoStore {
     [TodoStatus.Pending]: Todo[];
     [TodoStatus.Inprogress]: Todo[];
@@ -19,7 +21,13 @@ export const defaultVal = {
     [TodoStatus.Completed]: [],
 }
 
-const todoStore = reactive<TodoStore>(defaultVal);
+const storedData = localStorage.getItem(STORAGE_KEY);
+//const todoStore = reactive<TodoStore>(defaultVal);
+const todoStore = reactive<TodoStore>(storedData ? JSON.parse(storedData) : defaultVal);
+
+const saveTodoStoreToLocalStorage = () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todoStore));
+};
 
 export default () => {
     const getTodosByStatus = (todoStatus: TodoStatus) => {
@@ -28,6 +36,7 @@ export default () => {
 
     const addNewTodo = (todo: Todo) => {
         todoStore[todo.status].push(todo);
+        saveTodoStoreToLocalStorage();
     }
     
     return { getTodosByStatus, addNewTodo };
