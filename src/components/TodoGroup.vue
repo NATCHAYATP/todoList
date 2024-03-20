@@ -6,11 +6,12 @@ import CreateTodo from "./CreateTodo.vue";
 
 interface Props {
     status: TodoStatus;
+    saveTodoStoreToLocalStorage: () => void;
 }
 
 const props = defineProps<Props>();
 
-const { getTodosByStatus } = useTodos();
+const { getTodosByStatus, updateTodoStatus } = useTodos();
 const todoList = getTodosByStatus(props.status)
 
 const groupLabel = {
@@ -18,13 +19,22 @@ const groupLabel = {
     [TodoStatus.Inprogress]: "Inprogress",
     [TodoStatus.Completed]: "Completed",
 };
+
+const onDragEnd = (event: DragEvent & { newIndex: any }) => {
+    const draggedItemId = Number((event.target as HTMLElement)?.id); // เข้าถึง ID ของการ์ดที่ถูกลากและวาง
+    const newIndex = event.newIndex - 1; // เข้าถึงตำแหน่งใหม่ของการ์ดในลิสต์หลังจากการวาง
+    const status = props.status; // เข้าถึงสถานะของกลุ่มการ์ด
+
+    updateTodoStatus(draggedItemId, newIndex, status);
+    props.saveTodoStoreToLocalStorage(); // บันทึกข้อมูลใหม่ลงใน localStorage
+}
 </script>
 
 <template>
     <div class="group-wrapper">
         <h3>{{ groupLabel[props.status] }}</h3>
 
-        <draggable class="draggable" :list="todoList" group="todos" itemkey="id">
+        <draggable class="draggable" :list="todoList" group="todos" :itemKey="'id'" @end="onDragEnd">
             <template #item="{ element: todo }">
                 <li>
                     {{ todo.title }}

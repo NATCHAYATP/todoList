@@ -1,3 +1,4 @@
+import { log } from "console";
 import { TodoStatus, type Todo } from "../types";
 import { reactive, computed } from "vue";
 
@@ -38,6 +39,33 @@ export default () => {
         todoStore[todo.status].push(todo);
         saveTodoStoreToLocalStorage();
     }
-    
-    return { getTodosByStatus, addNewTodo };
+
+    const updateTodoStatus = (id: number, newIndex: number, status: TodoStatus) => {
+    // Find the todo by status
+    const todoToUpdate = todoStore[status].find(todo => todo.status === status);
+    console.log(todoToUpdate);
+    // If the todo is found
+    if (todoToUpdate) {
+        // Update its status
+        todoToUpdate.status = status;
+
+        // Reorder if necessary
+        if (newIndex !== -1) {
+            // Remove the todo from its current position
+            const currentIndex = todoStore[status].indexOf(todoToUpdate);
+            if (currentIndex !== -1) {
+                todoStore[status].splice(currentIndex, 1);
+            }
+
+            // Insert the todo to its new position
+            todoStore[status].splice(newIndex, 0, todoToUpdate);
+        }
+
+        // Save the changes to localStorage or emit events if necessary
+        saveTodoStoreToLocalStorage();
+        console.log("--->", saveTodoStoreToLocalStorage);
+        
+    }
+}
+    return { getTodosByStatus, addNewTodo, updateTodoStatus };
 };

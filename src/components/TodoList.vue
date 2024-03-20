@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import TodoGroup from './TodoGroup.vue';
 import { TodoStatus } from '../types';
+import saveTodoStoreToLocalStorage from '../store/useTodo';
 </script>
 
 <template>
     <div class="groups-wrapper">
-        <TodoGroup :status="TodoStatus.Pending" />
-        <TodoGroup :status="TodoStatus.Inprogress" />
-        <TodoGroup :status="TodoStatus.Completed" />
+        <TodoGroup :status="TodoStatus.Pending" :saveTodoStoreToLocalStorage="saveTodoStoreToLocalStorage" />
+        <TodoGroup :status="TodoStatus.Inprogress" :saveTodoStoreToLocalStorage="saveTodoStoreToLocalStorage" />
+        <TodoGroup :status="TodoStatus.Completed" :saveTodoStoreToLocalStorage="saveTodoStoreToLocalStorage" />
     </div>
 </template>
 
