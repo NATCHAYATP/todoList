@@ -4,15 +4,9 @@ import TodoList from './components/TodoList.vue';
 
 <template>
   <div class="app-wrapper">
-  <div>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/vue.svg"
-      width="125"
-      height="125"
-    />
-  </div>
+    <div>
+      <img alt="Vue logo" class="logo" src="./assets/vue.svg" width="125" height="125" />
+    </div>
 
     <div class="wrapper">
       <TodoList />
@@ -21,25 +15,25 @@ import TodoList from './components/TodoList.vue';
 </template>
 
 <style scoped>
-  .app-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .logo {
-    display: block;
-  }
+.logo {
+  display: block;
+}
 
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+header {
+  display: flex;
+  place-items: center;
+  padding-right: calc(var(--section-gap) / 2);
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+header .wrapper {
+  display: flex;
+  place-items: flex-start;
+  flex-wrap: wrap;
+}
 </style>

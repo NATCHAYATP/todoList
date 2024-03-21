@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TodoGroup from './TodoGroup.vue';
-import { TodoStatus } from '../types';
-import saveTodoStoreToLocalStorage from '../store/useTodo';
+import TodoGroup from "./TodoGroup.vue";
+import { TodoStatus } from "../types";
+import saveTodoStoreToLocalStorage from "../store/useTodo";
 </script>
 
 <template>
@@ -13,8 +13,7 @@ import saveTodoStoreToLocalStorage from '../store/useTodo';
 </template>
 
 <style scoped>
-
-.groups-wrapper{
+.groups-wrapper {
     display: flex;
     justify-content: space-around;
     gap: 20px;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { TodoStatus, Todo } from "../types";
 import { reactive, ref } from "vue";
-import useTodos from "../store/useTodo.ts"
+import useTodos from "../store/useTodo.ts";
 
 interface Props {
     status: TodoStatus;
@@ -29,15 +29,12 @@ const handleOnSubmit = () => {
     });
 
     resetForm();
-}
+};
 </script>
 
 <template>
     <div>
-        <h3 
-            v-if="!shouldDisplayForm" 
-            @click="shouldDisplayForm = !shouldDisplayForm"
-        >
+        <h3 v-if="!shouldDisplayForm" @click="shouldDisplayForm = !shouldDisplayForm">
             Add New
         </h3>
         <template v-else>

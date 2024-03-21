@@ -12,7 +12,7 @@ interface Props {
 const props = defineProps<Props>();
 
 const { getTodosByStatus, updateTodoStatus } = useTodos();
-const todoList = getTodosByStatus(props.status)
+const todoList = getTodosByStatus(props.status);
 
 const groupLabel = {
     [TodoStatus.Pending]: "Pending",
@@ -21,13 +21,13 @@ const groupLabel = {
 };
 
 const onDragEnd = (event: DragEvent & { newIndex: any }) => {
-    const draggedItemId = Number((event.target as HTMLElement)?.id); // เข้าถึง ID ของการ์ดที่ถูกลากและวาง
-    const newIndex = event.newIndex - 1; // เข้าถึงตำแหน่งใหม่ของการ์ดในลิสต์หลังจากการวาง
-    const status = props.status; // เข้าถึงสถานะของกลุ่มการ์ด
+    const draggedItemId = Number((event.target as HTMLElement)?.id);
+    const newIndex = event.newIndex - 1;
+    const status = props.status;
 
     updateTodoStatus(draggedItemId, newIndex, status);
-    props.saveTodoStoreToLocalStorage(); // บันทึกข้อมูลใหม่ลงใน localStorage
-}
+    props.saveTodoStoreToLocalStorage();
+};
 </script>
 
 <template>
@@ -45,7 +45,7 @@ const onDragEnd = (event: DragEvent & { newIndex: any }) => {
             </template>
         </draggable>
 
-        <CreateTodo :status="props.status"/>
+        <CreateTodo :status="props.status" />
     </div>
 </template>
 
