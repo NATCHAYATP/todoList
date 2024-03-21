@@ -41,6 +41,8 @@ export default () => {
     }
 
     const updateTodoStatus = (id: number, newIndex: number, status: TodoStatus) => {
+    console.log(id);
+    
     // Find the todo by status
     const todoToUpdate = todoStore[status].find(todo => todo.status === status);
     console.log(todoToUpdate);
@@ -53,7 +55,7 @@ export default () => {
         if (newIndex !== -1) {
             // Remove the todo from its current position
             const currentIndex = todoStore[status].indexOf(todoToUpdate);
-            if (currentIndex !== -1) {
+            if (currentIndex !== - 1) {
                 todoStore[status].splice(currentIndex, 1);
             }
 
